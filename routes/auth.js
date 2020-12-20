@@ -1,18 +1,15 @@
 let express = require('express');
 let router = express.Router();
-let passport = require('passport');
+//let passport = require('passport');
+let passportAuthController = require('../controller/authController') // route based logic save to controller dir
 
 
-router.get('/google',
-    passport.authenticate('google', { scope:
-        [ 'email', 'profile' ] }
-));
+router.get('/google',passportAuthController.getPassport);
 
-router.get( '/google/callback',
-    passport.authenticate( 'google', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/'
-}));
+router.get('/google/callback', passportAuthController.getPassportCallback);
+
+router.get( '/logout', passportAuthController.getLogout);
+
 
 
 

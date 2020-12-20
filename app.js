@@ -31,15 +31,19 @@ app.set('view engine', '.hbs');
 dbconnection.connection()
 
 // app middleware
-
 app.use(express.static('public'))
 app.use(morgan('dev'))
 express.urlencoded({extended : false })
 express.json()
 
-
 // passport config
+require('./passport/oAuth').passportAuth(passport);
 
+
+
+// passport middleware 
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
